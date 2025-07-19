@@ -76,16 +76,16 @@ if "sgpa_list" not in st.session_state:
 with st.form("entry_form", clear_on_submit=True):
     sgpa = st.number_input("🎯 Enter SGPA (0 - 10)", min_value=0.0, max_value=10.0, step=0.1, format="%.2f")
     credit = st.number_input("🎒 Enter Credits", min_value=0.0, step=0.5, format="%.1f")
-    submitted = st.form_submit_button("➕ Add Subject")
+    submitted = st.form_submit_button("➕ Add Semester")
 
     if submitted:
         st.session_state.sgpa_list.append(sgpa)
         st.session_state.credits_list.append(credit)
         st.success(f"Added: SGPA = {sgpa}, Credits = {credit}")
 
-# ---- Display Subject List ----
+# ---- Display Semester List ----
 if st.session_state.sgpa_list:
-    st.subheader("📋 Subject Entries")
+    st.subheader("📋 Semester Entries")
     df = pd.DataFrame({
         "SGPA": st.session_state.sgpa_list,
         "Credits": st.session_state.credits_list
@@ -100,15 +100,15 @@ if st.session_state.sgpa_list:
 
     col1, col2 = st.columns(2)
     with col1:
-        if st.button("❌ Remove Last Subject"):
+        if st.button("❌ Remove Last Semester"):
             st.session_state.sgpa_list.pop()
             st.session_state.credits_list.pop()
-            st.info("Last subject removed.")
+            st.info("Last Semester removed.")
     with col2:
         if st.button("🧹 Clear All"):
             st.session_state.sgpa_list.clear()
             st.session_state.credits_list.clear()
-            st.warning("All subjects cleared.")
+            st.warning("All Semesters cleared.")
 
     # ---- Export Options ----
     st.markdown("### 📤 Export Your Results")
